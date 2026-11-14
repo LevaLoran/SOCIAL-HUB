@@ -2,152 +2,116 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#08090b">
-  <meta name="description" content="Leva H3LL — find me across the internet.">
-  <title>Leva H3LL — Social Hub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080808">
+  <meta name="description" content="Leva H3LL — social links">
+  <title>Leva H3LL</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    :root { color-scheme: dark; --bg:#08090b; --panel:#101216; --line:rgba(255,255,255,.10); --muted:#858a94; --white:#f4f5f6; --accent:#d7ff62; }
-    * { box-sizing:border-box; }
-    html { scroll-behavior:smooth; }
-    body { margin:0; min-height:100vh; background:var(--bg); color:var(--white); font-family:Manrope, sans-serif; overflow-x:hidden; }
-    body:before { content:""; position:fixed; inset:0; pointer-events:none; opacity:.15; z-index:-1; background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px); background-size:56px 56px; mask-image:linear-gradient(to bottom,black,transparent 85%); }
-    .glow { position:fixed; width:480px; height:480px; border-radius:50%; background:rgba(215,255,98,.075); filter:blur(110px); top:-260px; left:50%; transform:translateX(-50%); pointer-events:none; z-index:-1; }
-    .wrap { width:min(920px, calc(100% - 40px)); margin:0 auto; padding:34px 0 44px; }
-    header { display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--line); padding-bottom:20px; animation:fadeDown .8s both; }
-    .brand { display:flex; align-items:center; gap:11px; font:500 11px 'DM Mono',monospace; letter-spacing:.18em; color:#b8bdc5; }
-    .brand-mark { width:25px; height:25px; border:1px solid var(--accent); display:grid; place-items:center; color:var(--accent); font-size:13px; transform:rotate(45deg); }
-    .brand-mark span { transform:rotate(-45deg); }
-    .status { display:flex; align-items:center; gap:8px; color:var(--muted); font:10px 'DM Mono',monospace; letter-spacing:.12em; text-transform:uppercase; }
-    .dot { width:6px; height:6px; background:var(--accent); border-radius:50%; box-shadow:0 0 12px var(--accent); }
-    main { padding-top:86px; }
-    .eyebrow { color:var(--accent); font:11px 'DM Mono',monospace; letter-spacing:.22em; text-transform:uppercase; display:flex; align-items:center; gap:12px; animation:rise .7s .1s both; }
-    .eyebrow:before { content:""; width:28px; height:1px; background:var(--accent); }
-    h1 { margin:18px 0 12px; font-size:clamp(54px, 10vw, 104px); line-height:.94; letter-spacing:-.085em; font-weight:800; animation:rise .8s .2s both; }
-    h1 span { color:var(--accent); }
-    .intro { color:#a2a7b0; font-size:15px; line-height:1.7; max-width:440px; animation:rise .8s .3s both; }
-    .section-head { display:flex; align-items:center; justify-content:space-between; margin:68px 0 17px; }
-    .section-head h2 { margin:0; font:11px 'DM Mono',monospace; color:#aeb3bc; letter-spacing:.18em; text-transform:uppercase; }
-    .section-head small { color:#646a74; font:10px 'DM Mono',monospace; }
-    .links { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
-    .link-card { min-height:105px; position:relative; display:flex; align-items:center; gap:17px; padding:20px; border:1px solid var(--line); border-radius:3px; background:linear-gradient(135deg,rgba(255,255,255,.045),rgba(255,255,255,.012)); color:inherit; text-decoration:none; overflow:hidden; transition:border-color .3s, transform .3s, background .3s; opacity:0; animation:rise .65s both; }
-    .link-card:nth-child(1){animation-delay:.35s}.link-card:nth-child(2){animation-delay:.43s}.link-card:nth-child(3){animation-delay:.51s}.link-card:nth-child(4){animation-delay:.59s}
-    .link-card:before { content:""; position:absolute; inset:0; background:linear-gradient(110deg,transparent 25%,rgba(215,255,98,.07),transparent 70%); transform:translateX(-110%); transition:transform .65s; }
-    .link-card:hover { transform:translateY(-4px); border-color:rgba(215,255,98,.55); background:rgba(215,255,98,.035); }
-    .link-card:hover:before { transform:translateX(110%); }
-    .icon { width:43px; height:43px; flex:0 0 43px; display:grid; place-items:center; border:1px solid var(--line); border-radius:3px; color:var(--accent); font:16px 'DM Mono',monospace; }
-    .link-info { min-width:0; position:relative; }
-    .link-info strong { display:block; font-size:15px; font-weight:700; }
-    .link-info span { display:block; margin-top:5px; color:var(--muted); font:10px 'DM Mono',monospace; letter-spacing:.04em; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-    .arrow { margin-left:auto; color:#737984; font-size:19px; transition:transform .3s,color .3s; position:relative; }
-    .link-card:hover .arrow { transform:translate(3px,-3px); color:var(--accent); }
-    .qr-panel { display:flex; align-items:center; justify-content:space-between; gap:28px; padding:25px; border:1px solid var(--line); background:var(--panel); position:relative; overflow:hidden; }
-    .qr-panel:after { content:""; position:absolute; width:220px; height:220px; right:-100px; top:-130px; border:1px solid rgba(215,255,98,.15); border-radius:50%; box-shadow:0 0 0 25px rgba(215,255,98,.025),0 0 0 50px rgba(215,255,98,.02); }
-    .qr-copy { position:relative; z-index:1; }
-    .qr-copy h3 { margin:0 0 8px; font-size:20px; letter-spacing:-.04em; }
-    .qr-copy p { margin:0; max-width:340px; color:var(--muted); font-size:12px; line-height:1.7; }
-    .qr-actions { display:flex; gap:9px; flex-wrap:wrap; margin-top:18px; }
-    button { cursor:pointer; border:1px solid var(--line); background:transparent; color:var(--white); padding:10px 13px; border-radius:2px; font:10px 'DM Mono',monospace; letter-spacing:.08em; transition:.25s; }
-    button.primary { background:var(--accent); color:#10120a; border-color:var(--accent); font-weight:500; }
-    button:hover { border-color:var(--accent); transform:translateY(-2px); }
-    #qrcode { width:116px; height:116px; padding:8px; background:#fff; position:relative; z-index:1; flex:0 0 116px; display:grid; place-items:center; }
-    #qrcode img, #qrcode canvas { width:100% !important; height:100% !important; image-rendering:pixelated; }
-    footer { display:flex; justify-content:space-between; gap:16px; border-top:1px solid var(--line); margin-top:62px; padding-top:18px; color:#646a74; font:10px 'DM Mono',monospace; letter-spacing:.08em; }
-    footer span:last-child { color:#9298a2; }
-    @keyframes rise { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
-    @keyframes fadeDown { from{opacity:0;transform:translateY(-12px)} to{opacity:1;transform:translateY(0)} }
-    @media(max-width:600px) { .wrap{width:min(100% - 28px,520px);padding-top:22px} main{padding-top:70px} .links{grid-template-columns:1fr;gap:9px}.link-card{min-height:88px;padding:16px}.section-head{margin-top:54px}.qr-panel{align-items:flex-start;padding:19px;gap:15px}#qrcode{width:92px;height:92px;flex-basis:92px}.qr-copy h3{font-size:17px}.qr-copy p{font-size:11px}footer{font-size:9px} }
-    @media(prefers-reduced-motion:reduce) { *,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important} }
+    :root{color-scheme:dark;--bg:#080808;--fg:#f5f5f5;--muted:#858585;--line:#242424;--surface:#0e0e0e}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;min-height:100vh;background:var(--bg);color:var(--fg);font-family:Manrope, sans-serif;overflow-x:hidden}
+    body:after{content:"";position:fixed;inset:0;pointer-events:none;opacity:.13;z-index:-1;background-image:radial-gradient(#fff .55px,transparent .55px);background-size:5px 5px;mask-image:linear-gradient(to bottom,#000,transparent 85%)}
+    .shell{width:min(720px,calc(100% - 40px));margin:0 auto;padding:34px 0 30px}
+    header{display:flex;align-items:center;justify-content:space-between;padding-bottom:17px;border-bottom:1px solid var(--line);animation:fade .8s both}
+    .wordmark{font:500 10px 'DM Mono',monospace;letter-spacing:.2em;color:#aaa}
+    .index{font:10px 'DM Mono',monospace;color:#666;letter-spacing:.12em}
+    main{padding-top:105px}
+    .eyebrow{font:10px 'DM Mono',monospace;letter-spacing:.2em;text-transform:uppercase;color:#888;animation:up .7s .08s both}
+    h1{font-size:clamp(58px,11vw,100px);letter-spacing:-.09em;line-height:.92;margin:22px 0 16px;font-weight:800;animation:up .8s .16s both}
+    h1 span{color:#777}
+    .subtitle{margin:0;color:#999;font-size:14px;line-height:1.7;animation:up .8s .24s both}
+    .rule{height:1px;background:var(--line);margin:62px 0 18px}
+    .label{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;color:#777;font:10px 'DM Mono',monospace;letter-spacing:.16em;text-transform:uppercase}
+    .links{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+    .link{min-height:82px;display:flex;align-items:center;gap:15px;padding:16px 17px;background:var(--surface);border:1px solid var(--line);text-decoration:none;color:var(--fg);transition:background .35s,border-color .35s,transform .35s;opacity:0;animation:up .65s both}
+    .link:nth-child(1){animation-delay:.32s}.link:nth-child(2){animation-delay:.4s}.link:nth-child(3){animation-delay:.48s}.link:nth-child(4){animation-delay:.56s}
+    .link:hover{background:#151515;border-color:#777;transform:translateY(-3px)}
+    .logo{width:25px;height:25px;object-fit:contain;filter:grayscale(1) brightness(0) invert(1);opacity:.9;flex:0 0 25px;transition:transform .35s}
+    .link:hover .logo{transform:scale(1.12)}
+    .meta{min-width:0}
+    .meta strong{display:block;font-size:13px;font-weight:700;letter-spacing:.01em}
+    .meta small{display:block;margin-top:4px;color:#777;font:10px 'DM Mono',monospace;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .arrow{margin-left:auto;color:#666;font-size:16px;transition:transform .3s,color .3s}
+    .link:hover .arrow{transform:translate(3px,-3px);color:#fff}
+    .qr-area{display:flex;align-items:center;justify-content:space-between;gap:22px;padding:20px 0 0}
+    .qr-copy h2{margin:0 0 7px;font-size:16px;letter-spacing:-.04em}
+    .qr-copy p{margin:0;color:#777;font-size:11px;line-height:1.65;max-width:280px}
+    .qr-buttons{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+    button{border:1px solid #3a3a3a;background:transparent;color:#eee;padding:9px 11px;font:9px 'DM Mono',monospace;letter-spacing:.08em;cursor:pointer;transition:background .25s,border-color .25s,transform .25s}
+    button:hover{background:#fff;color:#080808;border-color:#fff;transform:translateY(-2px)}
+    #qrcode{width:88px;height:88px;background:#fff;padding:6px;display:grid;place-items:center;flex:0 0 88px}
+    #qrcode canvas,#qrcode img{width:100%!important;height:100%!important}
+    footer{display:flex;justify-content:space-between;border-top:1px solid var(--line);margin-top:65px;padding-top:15px;color:#5f5f5f;font:9px 'DM Mono',monospace;letter-spacing:.12em}
+    @keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes fade{from{opacity:0}to{opacity:1}}
+    @media(max-width:520px){.shell{width:calc(100% - 30px);padding-top:23px}main{padding-top:82px}.links{grid-template-columns:1fr;gap:8px}.link{min-height:74px}.rule{margin-top:48px}.qr-area{align-items:flex-start}.qr-copy p{max-width:230px}#qrcode{width:76px;height:76px;flex-basis:76px}footer{margin-top:52px}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
   </style>
 </head>
 <body>
-  <div class="glow"></div>
-  <div class="wrap">
-    <header>
-      <div class="brand"><div class="brand-mark"><span>✳</span></div><span>PERSONAL / SOCIAL HUB</span></div>
-      <div class="status"><i class="dot"></i> ONLINE</div>
-    </header>
-
+  <div class="shell">
+    <header><div class="wordmark">LEVA H3LL / PERSONAL LINKS</div><div class="index">LINKS — 04</div></header>
     <main>
-      <div class="eyebrow">ONE PERSON. MANY PLATFORMS.</div>
+      <div class="eyebrow">A PLACE TO FIND ME</div>
       <h1>Leva <span>H3LL</span></h1>
-      <p class="intro">A little corner of the internet. Find me, follow what I create, and explore the things I'm into.</p>
+      <p class="subtitle">Find me across the internet.</p>
 
-      <div class="section-head">
-        <h2>Find me elsewhere</h2>
-        <small>01 — 04 / LINKS</small>
-      </div>
+      <div class="rule"></div>
+      <div class="label"><span>Socials</span><span>01 — 04</span></div>
       <section class="links" id="links" aria-label="Social links"></section>
 
-      <div class="section-head">
-        <h2>Take me with you</h2>
-        <small>SCAN TO CONNECT</small>
-      </div>
-      <section class="qr-panel">
+      <div class="rule"></div>
+      <div class="label"><span>Share profile</span><span>QR / 01</span></div>
+      <section class="qr-area">
         <div class="qr-copy">
-          <h3>One scan. All links.</h3>
-          <p>Scan this code to open my social hub. Save it or share it with someone.</p>
-          <div class="qr-actions">
-            <button class="primary" id="downloadQr">DOWNLOAD PNG ↗</button>
-            <button id="copyUrl">COPY PAGE LINK</button>
+          <h2>One link. Everything.</h2>
+          <p>Scan to open this page and find all my profiles.</p>
+          <div class="qr-buttons">
+            <button id="downloadQr">DOWNLOAD QR</button>
+            <button id="copyUrl">COPY LINK</button>
           </div>
         </div>
         <div id="qrcode" aria-label="QR code for this page"></div>
       </section>
     </main>
-
-    <footer><span>© <span id="year"></span> LEVA H3LL</span><span>BUILT TO CONNECT <span style="color:var(--accent)">✳</span></span></footer>
+    <footer><span>© <span id="year"></span> LEVA H3LL</span><span>STAY CONNECTED</span></footer>
   </div>
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <script src="./config.js"></script>
   <script>
-    const linksRoot = document.getElementById('links');
-    const links = window.SOCIAL_LINKS || [];
-    const symbols = { Telegram:'↗', GitHub:'⌘', Spotify:'♫', Steam:'◈' };
-
-    links.forEach((item) => {
-      const a = document.createElement('a');
-      a.className = 'link-card';
-      a.href = item.url;
-      a.target = '_blank';
-      a.rel = 'noopener noreferrer';
-      a.innerHTML = `<div class="icon">${symbols[item.name] || '↗'}</div>
-        <div class="link-info"><strong></strong><span></span></div><div class="arrow">↗</div>`;
-      a.querySelector('strong').textContent = item.name;
-      a.querySelector('span').textContent = item.handle;
-      linksRoot.appendChild(a);
+    const root=document.getElementById('links');
+    const brandIcons={
+      Telegram:'https://cdn.simpleicons.org/telegram/ffffff',
+      GitHub:'https://cdn.simpleicons.org/github/ffffff',
+      Spotify:'https://cdn.simpleicons.org/spotify/ffffff',
+      Steam:'https://cdn.simpleicons.org/steam/ffffff'
+    };
+    (window.SOCIAL_LINKS||[]).forEach(item=>{
+      const a=document.createElement('a');
+      a.className='link';a.href=item.url;a.target='_blank';a.rel='noopener noreferrer';
+      const img=document.createElement('img');img.className='logo';img.alt='';img.src=brandIcons[item.name]||'';
+      const meta=document.createElement('div');meta.className='meta';
+      const title=document.createElement('strong');title.textContent=item.name;
+      const detail=document.createElement('small');detail.textContent=item.handle;
+      meta.append(title,detail);
+      const arrow=document.createElement('span');arrow.className='arrow';arrow.textContent='↗';
+      a.append(img,meta,arrow);root.appendChild(a);
     });
-
-    document.getElementById('year').textContent = new Date().getFullYear();
-    const pageUrl = window.location.href.split('#')[0];
-    const qrTarget = document.getElementById('qrcode');
-    if (window.QRCode) {
-      new QRCode(qrTarget, { text: pageUrl, width: 200, height: 200, colorDark: '#08090b', colorLight: '#ffffff', correctLevel: QRCode.CorrectLevel.H });
-    } else {
-      qrTarget.textContent = 'QR unavailable';
-    }
-
-    document.getElementById('downloadQr').addEventListener('click', () => {
-      const canvas = qrTarget.querySelector('canvas');
-      const img = qrTarget.querySelector('img');
-      const source = canvas ? canvas.toDataURL('image/png') : (img ? img.src : null);
-      if (!source) return;
-      const a = document.createElement('a');
-      a.href = source; a.download = 'leva-h3ll-social-qr.png'; a.click();
+    document.getElementById('year').textContent=new Date().getFullYear();
+    const pageUrl=window.location.href.split('#')[0],qr=document.getElementById('qrcode');
+    if(window.QRCode)new QRCode(qr,{text:pageUrl,width:200,height:200,colorDark:'#080808',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.H});
+    document.getElementById('downloadQr').addEventListener('click',()=>{
+      const canvas=qr.querySelector('canvas'),img=qr.querySelector('img');
+      const src=canvas?canvas.toDataURL('image/png'):(img?img.src:null);if(!src)return;
+      const a=document.createElement('a');a.href=src;a.download='leva-h3ll-qr.png';a.click();
     });
-    document.getElementById('copyUrl').addEventListener('click', async (event) => {
-      const button = event.currentTarget;
-      try {
-        await navigator.clipboard.writeText(pageUrl);
-        button.textContent = 'COPIED ✓';
-      } catch {
-        button.textContent = 'COPY FAILED';
-      }
-      setTimeout(() => button.textContent = 'COPY PAGE LINK', 1800);
+    document.getElementById('copyUrl').addEventListener('click',async e=>{
+      const b=e.currentTarget;try{await navigator.clipboard.writeText(pageUrl);b.textContent='COPIED ✓'}catch{b.textContent='COPY FAILED'}
+      setTimeout(()=>b.textContent='COPY LINK',1600);
     });
   </script>
 </body>

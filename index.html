@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#08090b">
+  <meta name="description" content="Leva H3LL — find me across the internet.">
+  <title>Leva H3LL — Social Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { color-scheme: dark; --bg:#08090b; --panel:#101216; --line:rgba(255,255,255,.10); --muted:#858a94; --white:#f4f5f6; --accent:#d7ff62; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; min-height:100vh; background:var(--bg); color:var(--white); font-family:Manrope, sans-serif; overflow-x:hidden; }
+    body:before { content:""; position:fixed; inset:0; pointer-events:none; opacity:.15; z-index:-1; background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px); background-size:56px 56px; mask-image:linear-gradient(to bottom,black,transparent 85%); }
+    .glow { position:fixed; width:480px; height:480px; border-radius:50%; background:rgba(215,255,98,.075); filter:blur(110px); top:-260px; left:50%; transform:translateX(-50%); pointer-events:none; z-index:-1; }
+    .wrap { width:min(920px, calc(100% - 40px)); margin:0 auto; padding:34px 0 44px; }
+    header { display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--line); padding-bottom:20px; animation:fadeDown .8s both; }
+    .brand { display:flex; align-items:center; gap:11px; font:500 11px 'DM Mono',monospace; letter-spacing:.18em; color:#b8bdc5; }
+    .brand-mark { width:25px; height:25px; border:1px solid var(--accent); display:grid; place-items:center; color:var(--accent); font-size:13px; transform:rotate(45deg); }
+    .brand-mark span { transform:rotate(-45deg); }
+    .status { display:flex; align-items:center; gap:8px; color:var(--muted); font:10px 'DM Mono',monospace; letter-spacing:.12em; text-transform:uppercase; }
+    .dot { width:6px; height:6px; background:var(--accent); border-radius:50%; box-shadow:0 0 12px var(--accent); }
+    main { padding-top:86px; }
+    .eyebrow { color:var(--accent); font:11px 'DM Mono',monospace; letter-spacing:.22em; text-transform:uppercase; display:flex; align-items:center; gap:12px; animation:rise .7s .1s both; }
+    .eyebrow:before { content:""; width:28px; height:1px; background:var(--accent); }
+    h1 { margin:18px 0 12px; font-size:clamp(54px, 10vw, 104px); line-height:.94; letter-spacing:-.085em; font-weight:800; animation:rise .8s .2s both; }
+    h1 span { color:var(--accent); }
+    .intro { color:#a2a7b0; font-size:15px; line-height:1.7; max-width:440px; animation:rise .8s .3s both; }
+    .section-head { display:flex; align-items:center; justify-content:space-between; margin:68px 0 17px; }
+    .section-head h2 { margin:0; font:11px 'DM Mono',monospace; color:#aeb3bc; letter-spacing:.18em; text-transform:uppercase; }
+    .section-head small { color:#646a74; font:10px 'DM Mono',monospace; }
+    .links { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+    .link-card { min-height:105px; position:relative; display:flex; align-items:center; gap:17px; padding:20px; border:1px solid var(--line); border-radius:3px; background:linear-gradient(135deg,rgba(255,255,255,.045),rgba(255,255,255,.012)); color:inherit; text-decoration:none; overflow:hidden; transition:border-color .3s, transform .3s, background .3s; opacity:0; animation:rise .65s both; }
+    .link-card:nth-child(1){animation-delay:.35s}.link-card:nth-child(2){animation-delay:.43s}.link-card:nth-child(3){animation-delay:.51s}.link-card:nth-child(4){animation-delay:.59s}
+    .link-card:before { content:""; position:absolute; inset:0; background:linear-gradient(110deg,transparent 25%,rgba(215,255,98,.07),transparent 70%); transform:translateX(-110%); transition:transform .65s; }
+    .link-card:hover { transform:translateY(-4px); border-color:rgba(215,255,98,.55); background:rgba(215,255,98,.035); }
+    .link-card:hover:before { transform:translateX(110%); }
+    .icon { width:43px; height:43px; flex:0 0 43px; display:grid; place-items:center; border:1px solid var(--line); border-radius:3px; color:var(--accent); font:16px 'DM Mono',monospace; }
+    .link-info { min-width:0; position:relative; }
+    .link-info strong { display:block; font-size:15px; font-weight:700; }
+    .link-info span { display:block; margin-top:5px; color:var(--muted); font:10px 'DM Mono',monospace; letter-spacing:.04em; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .arrow { margin-left:auto; color:#737984; font-size:19px; transition:transform .3s,color .3s; position:relative; }
+    .link-card:hover .arrow { transform:translate(3px,-3px); color:var(--accent); }
+    .qr-panel { display:flex; align-items:center; justify-content:space-between; gap:28px; padding:25px; border:1px solid var(--line); background:var(--panel); position:relative; overflow:hidden; }
+    .qr-panel:after { content:""; position:absolute; width:220px; height:220px; right:-100px; top:-130px; border:1px solid rgba(215,255,98,.15); border-radius:50%; box-shadow:0 0 0 25px rgba(215,255,98,.025),0 0 0 50px rgba(215,255,98,.02); }
+    .qr-copy { position:relative; z-index:1; }
+    .qr-copy h3 { margin:0 0 8px; font-size:20px; letter-spacing:-.04em; }
+    .qr-copy p { margin:0; max-width:340px; color:var(--muted); font-size:12px; line-height:1.7; }
+    .qr-actions { display:flex; gap:9px; flex-wrap:wrap; margin-top:18px; }
+    button { cursor:pointer; border:1px solid var(--line); background:transparent; color:var(--white); padding:10px 13px; border-radius:2px; font:10px 'DM Mono',monospace; letter-spacing:.08em; transition:.25s; }
+    button.primary { background:var(--accent); color:#10120a; border-color:var(--accent); font-weight:500; }
+    button:hover { border-color:var(--accent); transform:translateY(-2px); }
+    #qrcode { width:116px; height:116px; padding:8px; background:#fff; position:relative; z-index:1; flex:0 0 116px; display:grid; place-items:center; }
+    #qrcode img, #qrcode canvas { width:100% !important; height:100% !important; image-rendering:pixelated; }
+    footer { display:flex; justify-content:space-between; gap:16px; border-top:1px solid var(--line); margin-top:62px; padding-top:18px; color:#646a74; font:10px 'DM Mono',monospace; letter-spacing:.08em; }
+    footer span:last-child { color:#9298a2; }
+    @keyframes rise { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes fadeDown { from{opacity:0;transform:translateY(-12px)} to{opacity:1;transform:translateY(0)} }
+    @media(max-width:600px) { .wrap{width:min(100% - 28px,520px);padding-top:22px} main{padding-top:70px} .links{grid-template-columns:1fr;gap:9px}.link-card{min-height:88px;padding:16px}.section-head{margin-top:54px}.qr-panel{align-items:flex-start;padding:19px;gap:15px}#qrcode{width:92px;height:92px;flex-basis:92px}.qr-copy h3{font-size:17px}.qr-copy p{font-size:11px}footer{font-size:9px} }
+    @media(prefers-reduced-motion:reduce) { *,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important} }
+  </style>
+</head>
+<body>
+  <div class="glow"></div>
+  <div class="wrap">
+    <header>
+      <div class="brand"><div class="brand-mark"><span>✳</span></div><span>PERSONAL / SOCIAL HUB</span></div>
+      <div class="status"><i class="dot"></i> ONLINE</div>
+    </header>
+
+    <main>
+      <div class="eyebrow">ONE PERSON. MANY PLATFORMS.</div>
+      <h1>Leva <span>H3LL</span></h1>
+      <p class="intro">A little corner of the internet. Find me, follow what I create, and explore the things I'm into.</p>
+
+      <div class="section-head">
+        <h2>Find me elsewhere</h2>
+        <small>01 — 04 / LINKS</small>
+      </div>
+      <section class="links" id="links" aria-label="Social links"></section>
+
+      <div class="section-head">
+        <h2>Take me with you</h2>
+        <small>SCAN TO CONNECT</small>
+      </div>
+      <section class="qr-panel">
+        <div class="qr-copy">
+          <h3>One scan. All links.</h3>
+          <p>Scan this code to open my social hub. Save it or share it with someone.</p>
+          <div class="qr-actions">
+            <button class="primary" id="downloadQr">DOWNLOAD PNG ↗</button>
+            <button id="copyUrl">COPY PAGE LINK</button>
+          </div>
+        </div>
+        <div id="qrcode" aria-label="QR code for this page"></div>
+      </section>
+    </main>
+
+    <footer><span>© <span id="year"></span> LEVA H3LL</span><span>BUILT TO CONNECT <span style="color:var(--accent)">✳</span></span></footer>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="./config.js"></script>
+  <script>
+    const linksRoot = document.getElementById('links');
+    const links = window.SOCIAL_LINKS || [];
+    const symbols = { Telegram:'↗', GitHub:'⌘', Spotify:'♫', Steam:'◈' };
+
+    links.forEach((item) => {
+      const a = document.createElement('a');
+      a.className = 'link-card';
+      a.href = item.url;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      a.innerHTML = `<div class="icon">${symbols[item.name] || '↗'}</div>
+        <div class="link-info"><strong></strong><span></span></div><div class="arrow">↗</div>`;
+      a.querySelector('strong').textContent = item.name;
+      a.querySelector('span').textContent = item.handle;
+      linksRoot.appendChild(a);
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const pageUrl = window.location.href.split('#')[0];
+    const qrTarget = document.getElementById('qrcode');
+    if (window.QRCode) {
+      new QRCode(qrTarget, { text: pageUrl, width: 200, height: 200, colorDark: '#08090b', colorLight: '#ffffff', correctLevel: QRCode.CorrectLevel.H });
+    } else {
+      qrTarget.textContent = 'QR unavailable';
+    }
+
+    document.getElementById('downloadQr').addEventListener('click', () => {
+      const canvas = qrTarget.querySelector('canvas');
+      const img = qrTarget.querySelector('img');
+      const source = canvas ? canvas.toDataURL('image/png') : (img ? img.src : null);
+      if (!source) return;
+      const a = document.createElement('a');
+      a.href = source; a.download = 'leva-h3ll-social-qr.png'; a.click();
+    });
+    document.getElementById('copyUrl').addEventListener('click', async (event) => {
+      const button = event.currentTarget;
+      try {
+        await navigator.clipboard.writeText(pageUrl);
+        button.textContent = 'COPIED ✓';
+      } catch {
+        button.textContent = 'COPY FAILED';
+      }
+      setTimeout(() => button.textContent = 'COPY PAGE LINK', 1800);
+    });
+  </script>
+</body>
+</html>
